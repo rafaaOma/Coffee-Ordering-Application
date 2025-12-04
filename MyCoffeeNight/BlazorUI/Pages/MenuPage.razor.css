@@ -1,0 +1,75 @@
+.HoleComponent{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 5vh;
+    position: relative;
+    overflow:hidden;
+    background-color: rgba(220, 147, 94, 0.336);
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: fit-content;
+    position: relative;
+    top:8vh;
+}
+.cart-Logo{
+   left:8vw;
+   position:absolute;
+   align-items: flex-start;
+   border:none;
+   background-color: transparent;
+   font-size: 20px;
+}
+.search-Logo{
+left: 80%;
+position:absolute;
+border:none;
+background-color: transparent;
+}
+.cart-Logo i,
+.search-Logo i {
+    font-size: 30px;
+}
+.page-Title{
+    margin-top:9vh;
+    font-size: 2.3rem;
+    padding:0px 20px;
+    color: black;
+}
+.page-Title b{
+    color:  rgb(140, 91, 55);
+}
+.Coffee-List{
+   justify-content: flex-start;
+   width: 100%;
+}
+.menu-row{
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+    padding-left: 10vw;
+}
+.menu-icon {
+    width: 12vw;
+    height: 9vh;
+}
+.menu-name{
+    margin-top: 2vh 0;
+    margin-left: 4vw;
+    position: absolute;
+    padding: 4vh 0 2vh 0;
+    font-weight: bold;
+}
+.menu-arrow{
+    position: absolute;
+    margin-left: 63vw;
+    font-weight: bold;
+    padding: 3vh 0 2vh 0;
+    font-size: 2.3rem;
+}
