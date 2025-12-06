@@ -7,7 +7,7 @@
     flex-direction: column;
     gap: 5vh;
     position: relative;
-    overflow:hidden;
+    overflow: scroll;
     background-color: rgba(220, 147, 94, 0.336);
 }
 .navbar{
@@ -48,11 +48,12 @@ background-color: transparent;
 .Coffee-List{
    justify-content: flex-start;
    width: 100%;
+   
 }
 .menu-row{
     display:flex;
     flex-direction: row;
-    gap:10px;
+    margin-bottom: 5vh;
     padding-left: 10vw;
 }
 .menu-icon {
@@ -72,4 +73,51 @@ background-color: transparent;
     font-weight: bold;
     padding: 3vh 0 2vh 0;
     font-size: 2.3rem;
+}
+.menu-row:hover{
+cursor: pointer;
+background-color:  rgba(113, 72, 43, 0.514);
+border-radius: 10px;
+}
+/* Tablets Design */
+@media (min-width:601px) and (max-width:1024px){
+    .menu-row{
+        background-color: rgb(220, 147, 94) ;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 5px rgba(52, 35, 23, 0.336);
+        width: 80%;
+        margin-bottom: 5vh;
+        margin-left: 10vw;
+    }
+    .menu-icon{
+        margin-left: -6vw;
+    } 
+    .menu-arrow{
+        margin-left:  -10px;
+       padding-left: 55vw;
+    }
+}
+/* desktop design */
+@media (min-width:1025px) and (max-width:1920px){
+    .menu-row{
+        background-color: rgb(220, 147, 94) ;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 5px rgba(52, 35, 23, 0.336);
+        width: 70%;
+        height: 15vh;
+        margin-bottom: 5vh;
+        margin-left: 15vw;
+    }
+    .menu-icon{
+        margin-left: -6vw;
+        margin-top: 20px;
+    } 
+    .menu-arrow{
+        margin-left:  -10vw;
+       padding-left: 55vw;
+    }
+    .menu-name{
+        margin-top: 1vh;
+        font-size: 1.9rem;
+    }
 }
