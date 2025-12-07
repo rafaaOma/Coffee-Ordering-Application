@@ -34,9 +34,10 @@
     {
         CoffeeList = CoffeeService.GetAllCoffee();
     }
-     void OpenDetails(int id)
+     void OpenDetails(int Id)
     {
-        Nav.NavigateTo($"/details/{id}");
+        Console.WriteLine($"Opening details for ID = {Id}");
+        Nav.NavigateTo($"/details/{Id}");
     }
 
     [Inject] NavigationManager Nav { get; set; } 

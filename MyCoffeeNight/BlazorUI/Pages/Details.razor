@@ -1,2 +1,89 @@
-@page "/details/{id}"
+@page "/details/{Id:int}"
+@using BlazorUI.Models
+@using BlazorUI.Services
+@inject BlazorUI.Services.CoffeeService CoffeeService
+@inject NavigationManager Nav
 
+@if (SelectedCoffee is null)
+{
+    <h2>Loading...</h2>
+}
+else
+{
+    <div class="details-page">
+
+        <!-- coffee image -->
+        <img src="@SelectedCoffee.Image" class="details-image" />
+
+        <!--coffee name-->
+        <h2 class="details-title">@SelectedCoffee.Name</h2>
+
+        <!-- coffee price -->
+        <h3 class="details-price">@TotalPrice SR</h3>
+        <!-- quantity selector -->
+        <div class="qty-box">
+            <button @onclick="Decrease">−</button>
+            <span>@Quantity</span>
+            <button @onclick="Increase">+</button>
+        </div>
+
+        <!-- coffee size -->
+        <div class="details-sizes">
+            <button  @onclick="@(() => ChangeSize("S"))" class="@Active("S")">Small</button>
+            <button @onclick="@(() => ChangeSize("M"))" class="@Active("M")">Medium</button>
+            <button @onclick="@(() => ChangeSize("L"))" class="@Active("L")">Large</button>
+        </div>
+
+    
+        <button class="add-to-cart" @onclick="AddToCart">
+            Add to Cart
+        </button>
+    </div>
+}
+@code {
+    [Parameter] public int Id { get; set; } //to get id from url
+
+    Coffee SelectedCoffee; 
+    int CurrentPrice;
+    string SelectedSize = "M";   //size Medium by defulat
+    int Quantity = 1;
+    int TotalPrice => CurrentPrice * Quantity;
+
+    protected override void OnInitialized()
+    {
+        SelectedCoffee = CoffeeService.GetCoffeeById(Id);
+
+        if (SelectedCoffee != null)
+            CurrentPrice = SelectedCoffee.MediumPrice; // assinging default value for price
+    }
+
+    void ChangeSize(string size)
+    {
+        SelectedSize = size;
+
+        CurrentPrice = size switch
+        {
+            "S" => SelectedCoffee.SmallPrice,
+            "M" => SelectedCoffee.MediumPrice,
+            "L" => SelectedCoffee.LargePrice,
+            _ => SelectedCoffee.MediumPrice 
+        };
+    }
+        void Increase()
+    {
+        Quantity++;
+    }
+
+    void Decrease()
+    {
+        if (Quantity > 1)
+            Quantity--;
+    }
+
+    void AddToCart()
+    {//i have to implement cart service later
+        Console.WriteLine($"Added {SelectedCoffee.Name} - {SelectedSize}");
+    }
+    string Active(string size) => //to haighlight selected size button
+        size == SelectedSize ? "active-size" : "";
+}
