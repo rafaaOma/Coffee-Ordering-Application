@@ -12,11 +12,9 @@ else
 {
     <div class="details-page">
         <div class="header">
-        
             <button class="back-button" @onclick="@(() => Nav.NavigateTo("/menupage"))">
-                ←
+              <b>←</b> 
             </button>
-
             <!--coffee name-->
             <h2 class="details-title">@SelectedCoffee.Name</h2>
         </div>
@@ -24,25 +22,27 @@ else
         <!-- coffee image -->
         <img src="@SelectedCoffee.Image" class="details-image" />
 
-        <!--coffee name-->
-        <h2 class="details-title">@SelectedCoffee.Name</h2>
+        <div class="details-info">
+            <!--coffee name-->
+            <h2 class="details-title">@SelectedCoffee.Name</h2>
 
-        <!-- coffee price -->
-        <h3 class="details-price">@TotalPrice SR</h3>
-        <!-- quantity selector -->
-        <div class="qty-box">
-            <button @onclick="Decrease">−</button>
-            <span>@Quantity</span>
-            <button @onclick="Increase">+</button>
-        </div>
-
+            <!-- coffee price -->
+            <h3 class="details-price">@TotalPrice SR</h3>
+            <!-- quantity selector -->
+            <div class="qty-box">
+                <button @onclick="Decrease">−</button>
+                <span>@Quantity</span>
+                <button @onclick="Increase" class="increase-button">+</button>
+            </div>
+        
         <!-- coffee size -->
         <div class="details-sizes">
-            <button  @onclick="@(() => ChangeSize("S"))" class="@Active("S")">Small</button>
-            <button @onclick="@(() => ChangeSize("M"))" class="@Active("M")">Medium</button>
-            <button @onclick="@(() => ChangeSize("L"))" class="@Active("L")">Large</button>
+            <h3>Size</h3>
+            <button  @onclick="@(() => ChangeSize("S"))" class="@Active("S")">S</button>
+            <button @onclick="@(() => ChangeSize("M"))" class="@Active("M")">M</button>
+            <button @onclick="@(() => ChangeSize("L"))" class="@Active("L")">L</button>
         </div>
-
+    </div>
     
         <button class="add-to-cart" @onclick="AddToCart">
             Add to Cart
