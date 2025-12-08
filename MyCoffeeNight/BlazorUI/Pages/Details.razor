@@ -11,6 +11,15 @@
 else
 {
     <div class="details-page">
+        <div class="header">
+        
+            <button class="back-button" @onclick="@(() => Nav.NavigateTo("/menupage"))">
+                ←
+            </button>
+
+            <!--coffee name-->
+            <h2 class="details-title">@SelectedCoffee.Name</h2>
+        </div>
 
         <!-- coffee image -->
         <img src="@SelectedCoffee.Image" class="details-image" />
