@@ -2,6 +2,7 @@
 @using BlazorUI.Models
 @using BlazorUI.Services
 @inject BlazorUI.Services.CoffeeService CoffeeService
+@inject BlazorUI.Services.CartService CartService
 @inject NavigationManager Nav
 
 @if (SelectedCoffee is null)
@@ -94,9 +95,19 @@ else
             Quantity--;
     }
 
-    void AddToCart()
-    {//i have to implement cart service later
-        Console.WriteLine($"Added {SelectedCoffee.Name} - {SelectedSize}");
+    void AddToCart() //adding item info to cart service
+    {
+            CartService.AddToCart(new CartItem
+        {
+            CoffeeName = SelectedCoffee.Name,
+            Size = SelectedSize,
+            Quantity = Quantity,
+            TotalPrice = TotalPrice,
+            UnitPrice = CurrentPrice,
+            ImageCart= SelectedCoffee.Image
+        });
+
+        Console.WriteLine("Item added to cart!");
     }
     string Active(string size) => //to haighlight selected size button
         size == SelectedSize ? "active-size" : "";

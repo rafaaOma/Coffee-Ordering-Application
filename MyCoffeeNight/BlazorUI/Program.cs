@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<BlazorUI.Services.CoffeeService>();
-
+builder.Services.AddSingleton<BlazorUI.Services.CartService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
