@@ -1,0 +1,44 @@
+@page "/menupage"
+@using BlazorUI.Models
+@using BlazorUI.Services
+@inject BlazorUI.Services.CoffeeService CoffeeService
+
+
+<div class="HoleComponent">
+    <div class="navbar">
+        <button class="cart-Logo">
+             <i class='bx  bx-cart' style='color:#000000'></i> 
+        </button> 
+          <button class="search-Logo">
+             <i class='bx  bx-search-alt' style='color:#000000' ></i> 
+        </button>
+    </div>
+    <div class="page-Title">
+     <p class="Text">It's Great <b>Day For Coffee.</b></p>
+    </div>
+    <div class="Coffee-List">
+        @foreach (var coffee in CoffeeList)
+            {
+                 <div class="menu-row"  @onclick="() => OpenDetails(coffee.Id)">
+                    <img src="@coffee.Icon" class="menu-icon" />
+                    <div class="togther"><span class="menu-name">@coffee.Name</span>
+                    <span class="menu-arrow">›</span></div>
+                </div>
+            }
+    </div>
+</div>
+@code {
+   List<Coffee> CoffeeList = new();
+
+    protected override void OnInitialized()
+    {
+        CoffeeList = CoffeeService.GetAllCoffee();
+    }
+     void OpenDetails(int Id)
+    {
+        Console.WriteLine($"Opening details for ID = {Id}");
+        Nav.NavigateTo($"/details/{Id}");
+    }
+
+    [Inject] NavigationManager Nav { get; set; } 
+}
