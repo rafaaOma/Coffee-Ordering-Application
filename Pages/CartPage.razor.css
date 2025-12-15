@@ -20,7 +20,6 @@
 th{
     font-size:1rem;
     background-color: transparent;
-    
     text-align: center;
     padding: 1vh 1vw;
 }
@@ -33,6 +32,30 @@ h2{
     margin-top: 5vw;
     margin-left:10vw;
 }
-/* h3{
-size: 80vw;
-} */
+h3{
+    position :absolute;
+    background-color:rgba(220, 147, 94, 0.393);
+    width: 50vw;
+    text-align: end;
+    padding:5px;
+}
+
+@media (max-width:600px)
+{
+.cart-table{
+    width:90vw;
+    margin:2vh 2vw;
+    font-size: 0.65rem;
+}
+th{
+    font-size:0.78rem;
+}
+.cart-table th:nth-child(1),
+.cart-table td:nth-child(1) {
+    display: none;
+}
+h3{
+position :absolute;
+width: 80vw;
+}
+}

@@ -13,7 +13,7 @@ else
     <table class="cart-table">
         <thead>
             <tr>
-                <th >Image</th>
+                <th>Image</th>
                 <th>Product Name</th>
                 <th>Size</th>
                 <th>Quantity</th>
@@ -29,7 +29,7 @@ else
                     <td> <img src="@item.ImageCart" class="cart-img" /></td>
                     <td>@item.CoffeeName</td>
                     <td>@item.Size</td>
-                     <td>
+                     <td class="quantity-controls">
                         <button @onclick="() => Decrease(item)">-</button>
                         <span>@item.Quantity</span>
                         <button @onclick="() => Increase(item)">+</button>
