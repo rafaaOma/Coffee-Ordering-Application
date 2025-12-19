@@ -28,15 +28,22 @@ else
                 <tr>
                     <td> <img src="@item.ImageCart" class="cart-img" /></td>
                     <td>@item.CoffeeName</td>
-                    <td>@item.Size</td>
+                    <td>
+                          <select class ="option" value="@item.Size"
+                            @onchange="(e) => OnSizeChanged(item, e)">
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                          </select>
+                    </td>
                      <td class="quantity-controls">
                         <button @onclick="() => Decrease(item)">-</button>
                         <span>@item.Quantity</span>
                         <button @onclick="() => Increase(item)">+</button>
                     </td>
-                    <td>@item.UnitPrice SR</td>
-                    <td>@item.TotalPrice</td>
-                    <td>
+                    <td >@item.UnitPrice SR</td>
+                    <td >@item.TotalPrice</td>
+                    <td >
                         <button class="remove-btn" @onclick="() => RemoveItem(item)">
                             🗑
                         </button>
@@ -44,12 +51,12 @@ else
                 </tr>
             }
                 <tr>
-                    <td><h3>Total: @CartService.GetTotal() SR</h3></td>
+                    <td class="last-row"><h3>Total: @CartService.GetTotal() SR</h3></td>
                 </tr>
         </tbody>
     </table>
-
 }
+<div class="nothing"><p></p></div>
 </div>
 
 @code
@@ -70,5 +77,21 @@ else
         void RemoveItem(CartItem item)
     {
         CartService.RemoveFromCart(item);
+    }
+    void OnSizeChanged(CartItem item, ChangeEventArgs e)
+    {
+        item.Size = e.Value!.ToString()!;
+
+        item.UnitPrice = item.Size switch
+        {
+            "S" => item.SmallPrice,
+            "M" => item.MediumPrice,
+            "L" => item.LargePrice,
+            _ => item.UnitPrice
+        };
+
+        item.TotalPrice = item.UnitPrice * item.Quantity;
+
+        StateHasChanged(); 
     }
 }
