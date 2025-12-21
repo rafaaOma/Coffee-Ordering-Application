@@ -20,5 +20,9 @@ public class CartService
     {
         Items.Clear();
     }
+     public int GetAllCoffeeNum()
+    {
+        return Items.Count;
+    }
 }
 }

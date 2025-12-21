@@ -53,6 +53,10 @@ else
         <button class="add-to-cart" @onclick="AddToCart">
             Add to Cart
         </button>
+        @if (!string.IsNullOrEmpty(Message))
+        {
+            <p class="added-succsed">@Message</p>
+        }
     </div>
 }
 @code {
@@ -63,6 +67,7 @@ else
     string SelectedSize = "M";   //size Medium by defulat
     int Quantity = 1;
     int TotalPrice => CurrentPrice * Quantity;
+    string Message = "";
 
     protected override void OnInitialized()
     {
@@ -83,20 +88,24 @@ else
             "L" => SelectedCoffee.LargePrice,
             _ => SelectedCoffee.MediumPrice 
         };
+        Message = "";
     }
         void Increase()
     {
         Quantity++;
+        Message = "";
     }
 
     void Decrease()
     {
         if (Quantity > 1)
             Quantity--;
+
+        Message = "";
     }
 
-    void AddToCart() //adding item info to cart service
-    {
+    async Task AddToCart() //adding item info to cart service
+    { 
             CartService.AddToCart(new CartItem
         {
             CoffeeName = SelectedCoffee.Name,
@@ -111,7 +120,10 @@ else
         });
 
         Console.WriteLine("Item added to cart!");
+        Message = "✔ Product added to cart successfully";
+        await InvokeAsync(StateHasChanged);
     }
+
     string Active(string size) => //to haighlight selected size button
         size == SelectedSize ? "active-size" : "";
 }

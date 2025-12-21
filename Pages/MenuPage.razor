@@ -2,22 +2,29 @@
 @using BlazorUI.Models
 @using BlazorUI.Services
 @inject BlazorUI.Services.CoffeeService CoffeeService
-
+@inject BlazorUI.Services.CartService CartService
 
 <div class="HoleComponent">
     <div class="navbar">
-        <button class="cart-Logo" @onclick="@(() => Nav.NavigateTo("/Cart"))">
+        <div>
+            <button class="cart-Logo" @onclick="@(() => Nav.NavigateTo("/Cart"))">
              <i class='bx  bx-cart' style='color:#000000'></i> 
-        </button> 
-          <button class="search-Logo">
+            </button> 
+            <span class="cart-count">@CartService.GetAllCoffeeNum()</span>
+        </div>
+          <button  type="button" class="search-Logo" @onclick="ToggleSearch">
              <i class='bx  bx-search-alt' style='color:#000000' ></i> 
         </button>
+           @if (ShowSearch)
+    {
+        <input type="text" placeholder="coffee Name.." @bind="SearchText" autofocus/>
+    }
     </div>
     <div class="page-Title">
      <p class="Text">It's Great <b>Day For Coffee.</b></p>
     </div>
     <div class="Coffee-List">
-        @foreach (var coffee in CoffeeList)
+        @foreach (var coffee in  DisplayedCoffeeList)
             {
                  <div class="menu-row"  @onclick="() => OpenDetails(coffee.Id)">
                     <img src="@coffee.Icon" class="menu-icon" />
@@ -28,17 +35,36 @@
     </div>
 </div>
 @code {
+    bool ShowSearch = false;
+
+    string SearchText = "";
    List<Coffee> CoffeeList = new();
 
     protected override void OnInitialized()
     {
         CoffeeList = CoffeeService.GetAllCoffee();
     }
+    protected void coffeeCount(){
+        int count = CartService.GetAllCoffeeNum();
+    }
+    IEnumerable<Coffee> DisplayedCoffeeList //presented coffee list 
+{
+    get
+    {
+        if (string.IsNullOrWhiteSpace(SearchText))
+            return CoffeeList;//list without filtering 
+
+        return CoffeeList.Where(c => c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase));//with filtring 
+    }
+}
      void OpenDetails(int Id)
     {
         Console.WriteLine($"Opening details for ID = {Id}");
         Nav.NavigateTo($"/details/{Id}");
     }
-
+ void ToggleSearch()
+{
+    ShowSearch = !ShowSearch;
+}
     [Inject] NavigationManager Nav { get; set; } 
 }

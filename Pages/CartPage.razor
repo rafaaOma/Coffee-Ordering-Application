@@ -2,6 +2,7 @@
 @using BlazorUI.Models
 @using BlazorUI.Services
 @inject BlazorUI.Services.CartService CartService
+@inject NavigationManager Nav
 <div class="cart-page">
 <h2>Shopping Cart</h2>
 @if (CartService.Items.Count == 0)
@@ -56,6 +57,9 @@ else
         </tbody>
     </table>
 }
+<button class="back-button" @onclick="@(() => Nav.NavigateTo("/menupage"))">
+              <b>←</b> 
+            </button>
 <div class="nothing"><p></p></div>
 </div>
 

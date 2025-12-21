@@ -58,6 +58,16 @@ h3{
 .quantity-controls button{
     background-color: rgba(160, 81, 45, 0.527);
 }
+.back-button{
+    width: 3vw;
+    margin-top: 8vh;
+    margin-left: 10vw;
+}
+p{
+    margin-left: 10vw;
+    margin-top: 3vh;
+    color:red;
+}
 @media (max-width:600px)
 {
 .cart-table{

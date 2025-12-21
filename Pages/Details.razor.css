@@ -122,6 +122,10 @@
 .active-size {
     font-weight: 900;
 }
+.added-succsed{
+    margin-left: 28vw;
+    color:green;
+}
 @media (min-width:1025px) and (max-width:1900px){
     .blob {
      position:absolute;
